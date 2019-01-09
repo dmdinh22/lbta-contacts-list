@@ -14,6 +14,10 @@ class ViewController: UITableViewController {
         "Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"
     ]
 
+    let dNames = [
+        "Drake", "Dr. Dre", "Diddy", "De La Soul"
+    ]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -37,12 +41,19 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        if section == 0 {
+            return names.count
+        }
+
+        return dNames.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        let name = names[indexPath.row]
+
+//        let name = names[indexPath.row]
+        let name = indexPath.section == 0 ? names[indexPath.row] : dNames[indexPath.row]
+
         cell.textLabel?.text = "\(name) Section:\(indexPath.section) Row:\(indexPath.row)"
 
         return cell

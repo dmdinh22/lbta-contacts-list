@@ -18,6 +18,17 @@ class ViewController: UITableViewController {
         "Drake", "Dr. Dre", "Diddy", "De La Soul"
     ]
 
+    let eNames = [
+        "Eazy E", "Eminem"
+    ]
+
+    let TwoDArray = [
+        ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"],
+        ["Drake", "Dr. Dre", "Diddy", "De La Soul"],
+        ["Eazy E", "Eminem", "E-40"],
+        ["Wu Tang Clan", "Lil Wayne"]
+    ]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -37,22 +48,25 @@ class ViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return TwoDArray.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return names.count
-        }
+//        if section == 0 {
+//            return names.count
+//        }
+//
+//        return dNames.count
 
-        return dNames.count
+        return TwoDArray[section].count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
 
 //        let name = names[indexPath.row]
-        let name = indexPath.section == 0 ? names[indexPath.row] : dNames[indexPath.row]
+//        let name = indexPath.section == 0 ? names[indexPath.row] : dNames[indexPath.row]
+        let name = TwoDArray[indexPath.section][indexPath.row]
 
         cell.textLabel?.text = "\(name) Section:\(indexPath.section) Row:\(indexPath.row)"
 

@@ -29,9 +29,18 @@ class ViewController: UITableViewController {
         ["Wu Tang Clan", "Lil Wayne"]
     ]
 
+    @objc func handleShowIndexPath() {
+        print("Attempting reload animation of indexPath...")
+
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .left)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Show IndexPath", style: .plain, target: self, action: #selector(handleShowIndexPath))
         navigationItem.title = "Contacts"
         navigationController?.navigationBar.prefersLargeTitles = true
 

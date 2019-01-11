@@ -22,7 +22,7 @@ class ViewController: UITableViewController {
         "Eazy E", "Eminem"
     ]
 
-    let TwoDArray = [
+    let twoDArray = [
         ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"],
         ["Drake", "Dr. Dre", "Diddy", "De La Soul"],
         ["Eazy E", "Eminem", "E-40"],
@@ -32,8 +32,15 @@ class ViewController: UITableViewController {
     @objc func handleShowIndexPath() {
         print("Attempting reload animation of indexPath...")
 
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .left)
+        // build all indexPaths to reload
+        var indexPathsToReload = [IndexPath]()
+
+        for index in twoDArray[0].indices {
+            let indexPath = IndexPath(row: index, section: 0)
+            indexPathsToReload.append(indexPath)
+        }
+
+        tableView.reloadRows(at: indexPathsToReload, with: .left)
     }
 
     override func viewDidLoad() {
@@ -57,7 +64,7 @@ class ViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return TwoDArray.count
+        return twoDArray.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,7 +74,7 @@ class ViewController: UITableViewController {
 //
 //        return dNames.count
 
-        return TwoDArray[section].count
+        return twoDArray[section].count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,7 +82,7 @@ class ViewController: UITableViewController {
 
 //        let name = names[indexPath.row]
 //        let name = indexPath.section == 0 ? names[indexPath.row] : dNames[indexPath.row]
-        let name = TwoDArray[indexPath.section][indexPath.row]
+        let name = twoDArray[indexPath.section][indexPath.row]
 
         cell.textLabel?.text = "\(name) Section:\(indexPath.section) Row:\(indexPath.row)"
 

@@ -10,23 +10,14 @@ import UIKit
 
 class ViewController: UITableViewController {
     let cellId = "cellId"
-    let names = [
-        "Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"
-    ]
 
-    let dNames = [
-        "Drake", "Dr. Dre", "Diddy", "De La Soul"
-    ]
-
-    let eNames = [
-        "Eazy E", "Eminem"
-    ]
+    
 
     var twoDArray = [
-        ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"],
-        ["Drake", "Dr. Dre", "Diddy", "De La Soul"],
-        ["Eazy E", "Eminem", "E-40"],
-        ["Wu Tang Clan", "Lil Wayne"]
+        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"]),
+        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"]),
+        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"]),
+        ExpandableNames(isExpanded: true, names: ["Wu Tang Clan", "Lil Wayne"])
     ]
 
     var showIndexPaths = false
@@ -38,17 +29,17 @@ class ViewController: UITableViewController {
         var indexPathsToReload = [IndexPath]()
 
         for section in twoDArray.indices {
-            for row in twoDArray[section].indices {
+            for row in twoDArray[section].names.indices {
                 print(section, row)
                 let indexPath = IndexPath(row: row, section: section)
                 indexPathsToReload.append(indexPath)
             }
         }
 
-//        for index in twoDArray[0].indices {
-//            let indexPath = IndexPath(row: index, section: 0)
-//            indexPathsToReload.append(indexPath)
-//        }
+        //        for index in twoDArray[0].indices {
+        //            let indexPath = IndexPath(row: index, section: 0)
+        //            indexPathsToReload.append(indexPath)
+        //        }
 
         showIndexPaths = !showIndexPaths
 
@@ -84,19 +75,27 @@ class ViewController: UITableViewController {
 
     @objc func handleExpandCloseSection(button: UIButton) {
         let section = button.tag
-        
+
         // close section by deleting all rows within
         var indexPaths = [IndexPath]()
-        for row in twoDArray[section].indices {
+        for row in twoDArray[section].names.indices {
             let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
         }
 
-        // delete names in section in array
-        twoDArray[section].removeAll()
+        // flag expanded prop
+        let isExpanded = twoDArray[section].isExpanded
+        twoDArray[section].isExpanded = !isExpanded
 
-        // delete rows from table
-        tableView.deleteRows(at: indexPaths, with: .fade)
+        button.setTitle(isExpanded ? "Open" : "Close", for: .normal)
+
+        if isExpanded {
+            // delete rows from table section
+            tableView.deleteRows(at: indexPaths, with: .fade)
+        } else {
+            // add rows to table section
+            tableView.insertRows(at: indexPaths, with: .fade)
+        }
     }
 
     // set height of row
@@ -109,19 +108,18 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 0 {
-//            return names.count
-//        }
-//
-//        return dNames.count
+        // handle closed section case
+        if !twoDArray[section].isExpanded {
+            return 0
+        }
 
-        return twoDArray[section].count
+        return twoDArray[section].names.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
 
-        let name = twoDArray[indexPath.section][indexPath.row]
+        let name = twoDArray[indexPath.section].names[indexPath.row]
 
         cell.textLabel?.text = name
 

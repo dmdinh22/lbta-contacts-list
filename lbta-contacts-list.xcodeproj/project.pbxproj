@@ -12,6 +12,7 @@
 		5463F9AD21E491BE007DE90F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5463F9AB21E491BE007DE90F /* Main.storyboard */; };
 		5463F9AF21E491C2007DE90F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5463F9AE21E491C2007DE90F /* Assets.xcassets */; };
 		5463F9B221E491C2007DE90F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5463F9B021E491C2007DE90F /* LaunchScreen.storyboard */; };
+		54F80A6921EB35950011C59F /* ExpandableNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F80A6821EB35950011C59F /* ExpandableNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		5463F9AE21E491C2007DE90F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5463F9B121E491C2007DE90F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5463F9B321E491C2007DE90F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54F80A6821EB35950011C59F /* ExpandableNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				5463F9AE21E491C2007DE90F /* Assets.xcassets */,
 				5463F9B021E491C2007DE90F /* LaunchScreen.storyboard */,
 				5463F9B321E491C2007DE90F /* Info.plist */,
+				54F80A6821EB35950011C59F /* ExpandableNames.swift */,
 			);
 			path = "lbta-contacts-list";
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54F80A6921EB35950011C59F /* ExpandableNames.swift in Sources */,
 				5463F9AA21E491BE007DE90F /* ViewController.swift in Sources */,
 				5463F9A821E491BE007DE90F /* AppDelegate.swift in Sources */,
 			);

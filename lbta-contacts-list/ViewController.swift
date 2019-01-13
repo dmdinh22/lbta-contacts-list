@@ -77,23 +77,25 @@ class ViewController: UITableViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
 
         button.addTarget(self, action: #selector(handleExpandCloseSection), for: .touchUpInside)
+        button.tag = section // set button tag to section clicked
 
         return button
     }
 
-    @objc func handleExpandCloseSection() {
-        print("hitting handleExpandCloseSection")
-
-        let section = 0
+    @objc func handleExpandCloseSection(button: UIButton) {
+        let section = button.tag
+        
         // close section by deleting all rows within
         var indexPaths = [IndexPath]()
         for row in twoDArray[section].indices {
-            print(0, row)
-            let indexPath = IndexPath(row: row, section: 0)
+            let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
         }
 
+        // delete names in section in array
         twoDArray[section].removeAll()
+
+        // delete rows from table
         tableView.deleteRows(at: indexPaths, with: .fade)
     }
 

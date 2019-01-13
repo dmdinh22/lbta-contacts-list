@@ -22,7 +22,7 @@ class ViewController: UITableViewController {
         "Eazy E", "Eminem"
     ]
 
-    let twoDArray = [
+    var twoDArray = [
         ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"],
         ["Drake", "Dr. Dre", "Diddy", "De La Soul"],
         ["Eazy E", "Eminem", "E-40"],
@@ -69,11 +69,37 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.text = "Header"
-        label.backgroundColor = UIColor.lightGray
 
-        return label
+        let button = UIButton(type: .system)
+        button.setTitle("Close", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .yellow
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+
+        button.addTarget(self, action: #selector(handleExpandCloseSection), for: .touchUpInside)
+
+        return button
+    }
+
+    @objc func handleExpandCloseSection() {
+        print("hitting handleExpandCloseSection")
+
+        let section = 0
+        // close section by deleting all rows within
+        var indexPaths = [IndexPath]()
+        for row in twoDArray[section].indices {
+            print(0, row)
+            let indexPath = IndexPath(row: row, section: 0)
+            indexPaths.append(indexPath)
+        }
+
+        twoDArray[section].removeAll()
+        tableView.deleteRows(at: indexPaths, with: .fade)
+    }
+
+    // set height of row
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 34
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

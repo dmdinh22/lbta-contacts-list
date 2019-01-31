@@ -11,8 +11,6 @@ import UIKit
 class ViewController: UITableViewController {
     let cellId = "cellId"
 
-    
-
     var twoDArray = [
         ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"]),
         ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"]),
@@ -56,7 +54,7 @@ class ViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
 
         // add cells into tableview
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(ContactCell.self, forCellReuseIdentifier: cellId)
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5412BDBA2202E18D00642210 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412BDB92202E18D00642210 /* ContactCell.swift */; };
 		5463F9A821E491BE007DE90F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5463F9A721E491BE007DE90F /* AppDelegate.swift */; };
 		5463F9AA21E491BE007DE90F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5463F9A921E491BE007DE90F /* ViewController.swift */; };
 		5463F9AD21E491BE007DE90F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5463F9AB21E491BE007DE90F /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5412BDB92202E18D00642210 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		5463F9A421E491BE007DE90F /* lbta-contacts-list.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lbta-contacts-list.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5463F9A721E491BE007DE90F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5463F9A921E491BE007DE90F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				5463F9B021E491C2007DE90F /* LaunchScreen.storyboard */,
 				5463F9B321E491C2007DE90F /* Info.plist */,
 				54F80A6821EB35950011C59F /* ExpandableNames.swift */,
+				5412BDB92202E18D00642210 /* ContactCell.swift */,
 			);
 			path = "lbta-contacts-list";
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5412BDBA2202E18D00642210 /* ContactCell.swift in Sources */,
 				54F80A6921EB35950011C59F /* ExpandableNames.swift in Sources */,
 				5463F9AA21E491BE007DE90F /* ViewController.swift in Sources */,
 				5463F9A821E491BE007DE90F /* AppDelegate.swift in Sources */,

@@ -11,6 +11,11 @@ import UIKit
 class ViewController: UITableViewController {
     let cellId = "cellId"
 
+    // TODO: use Custom Delegation properly 
+    func someMethodIWantToCall() {
+        print("Inside of View Controller now...")
+    }
+
     var twoDArray = [
         ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"]),
         ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"]),
@@ -115,7 +120,9 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ContactCell
+        // linking VC to cells
+        cell.link = self
 
         let name = twoDArray[indexPath.section].names[indexPath.row]
 

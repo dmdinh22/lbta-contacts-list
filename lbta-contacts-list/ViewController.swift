@@ -12,8 +12,12 @@ class ViewController: UITableViewController {
     let cellId = "cellId"
 
     // TODO: use Custom Delegation properly 
-    func someMethodIWantToCall() {
+    func someMethodIWantToCall(cell: UITableViewCell) {
         print("Inside of View Controller now...")
+
+        // figure out which name we're clicking on
+        let indexPathTapped = tableView.indexPath(for: cell)
+        print(indexPathTapped)
     }
 
     var twoDArray = [

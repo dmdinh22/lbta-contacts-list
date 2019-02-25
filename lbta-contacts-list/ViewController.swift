@@ -14,15 +14,18 @@ class ViewController: UITableViewController {
     // TODO: use Custom Delegation properly 
     func someMethodIWantToCall(cell: UITableViewCell) {
         // figure out which name we're clicking on
-        let indexPathTapped = tableView.indexPath(for: cell)
-//        print(indexPathTapped)
+        guard let indexPathTapped = tableView.indexPath(for: cell) else {
+            return
+        }
 
-        let contact = twoDArray[indexPathTapped!.section].names[indexPathTapped!.row]
+        let contact = twoDArray[indexPathTapped.section].names[indexPathTapped.row]
         print(contact)
 
         let hasFavorited = contact.hasFavorited
 
-        twoDArray[indexPathTapped!.section].names[indexPathTapped!.row].hasFavorited = !hasFavorited
+        twoDArray[indexPathTapped.section].names[indexPathTapped.row].hasFavorited = !hasFavorited
+
+        tableView.reloadRows(at: [indexPathTapped], with: .fade)
     }
 
     var twoDArray = [
@@ -137,6 +140,7 @@ class ViewController: UITableViewController {
         let contact = twoDArray[indexPath.section].names[indexPath.row]
 
         cell.textLabel?.text = contact.name
+        cell.accessoryView?.tintColor = contact.hasFavorited ? UIColor.red : .lightGray
 
         if showIndexPaths {
             cell.textLabel?.text = "\(contact.name) Section:\(indexPath.section) Row:\(indexPath.row)"

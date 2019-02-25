@@ -25,14 +25,15 @@ class ViewController: UITableViewController {
 
         twoDArray[indexPathTapped.section].names[indexPathTapped.row].hasFavorited = !hasFavorited
 
-        tableView.reloadRows(at: [indexPathTapped], with: .fade)
+//        tableView.reloadRows(at: [indexPathTapped], with: .fade) - list gets jumpy when favoriting
+        cell.accessoryView?.tintColor = hasFavorited ? .lightGray :.red
     }
 
     var twoDArray = [
-//        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"]),
-//        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"]),
-//        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"]),
-        ExpandableNames(isExpanded: true, names: [Contact(name: "Wu Tang Clan", hasFavorited: false)])//, "Lil Wayne"])
+        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"].map{ Contact(name: $0, hasFavorited: false)}),
+        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"].map{ Contact(name: $0, hasFavorited: false)}),
+        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"].map{ Contact(name: $0, hasFavorited: false)}),
+        ExpandableNames(isExpanded: true, names: [Contact(name: "Wu Tang Clan", hasFavorited: false)])
     ]
 
     var showIndexPaths = false

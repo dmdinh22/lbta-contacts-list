@@ -17,20 +17,25 @@ class ViewController: UITableViewController {
         let indexPathTapped = tableView.indexPath(for: cell)
 //        print(indexPathTapped)
 
-        let name = twoDArray[indexPathTapped!.section].names[indexPathTapped!.row]
-        print(name)
+        let contact = twoDArray[indexPathTapped!.section].names[indexPathTapped!.row]
+        print(contact)
+
+        let hasFavorited = contact.hasFavorited
+
+        twoDArray[indexPathTapped!.section].names[indexPathTapped!.row].hasFavorited = !hasFavorited
     }
 
     var twoDArray = [
-        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"]),
-        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"]),
-        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"]),
-        ExpandableNames(isExpanded: true, names: ["Wu Tang Clan", "Lil Wayne"])
+//        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"]),
+//        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"]),
+//        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"]),
+        ExpandableNames(isExpanded: true, names: [Contact(name: "Wu Tang Clan", hasFavorited: false)])//, "Lil Wayne"])
     ]
 
     var showIndexPaths = false
 
     @objc func handleShowIndexPath() {
+
         print("Attempting reload animation of indexPath...")
 
         // build all indexPaths to reload
@@ -129,12 +134,12 @@ class ViewController: UITableViewController {
         // linking VC to cells
         cell.link = self
 
-        let name = twoDArray[indexPath.section].names[indexPath.row]
+        let contact = twoDArray[indexPath.section].names[indexPath.row]
 
-        cell.textLabel?.text = name
+        cell.textLabel?.text = contact.name
 
         if showIndexPaths {
-            cell.textLabel?.text = "\(name) Section:\(indexPath.section) Row:\(indexPath.row)"
+            cell.textLabel?.text = "\(contact.name) Section:\(indexPath.section) Row:\(indexPath.row)"
         }
 
         return cell

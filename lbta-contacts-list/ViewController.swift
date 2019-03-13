@@ -30,12 +30,14 @@ class ViewController: UITableViewController {
         cell.accessoryView?.tintColor = hasFavorited ? .lightGray :.red
     }
 
-    var twoDArray = [
-        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
-        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
-        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
-        ExpandableNames(isExpanded: true, names: [FavoritableContact(name: "Wu Tang Clan", hasFavorited: false)])
-    ]
+    var twoDArray = [ExpandableNames]()
+
+//    var twoDArray = [
+//        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
+//        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
+//        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
+//        ExpandableNames(isExpanded: true, names: [FavoritableContact(name: "Wu Tang Clan", hasFavorited: false)])
+//    ]
 
     private func fetchContacts() {
         print("Attempting to fetch contacts today...")
@@ -64,12 +66,13 @@ class ViewController: UITableViewController {
                         print(contact.familyName)
                         print(contact.phoneNumbers.first?.value.stringValue ?? "")
 
-                        favoritableContacts.append(FavoritableContact(name: "\(contact.givenName) \(contact.familyName)", hasFavorited: false))
+//                        favoritableContacts.append(FavoritableContact(name: "\(contact.givenName) \(contact.familyName)", hasFavorited: false))
+                        favoritableContacts.append(FavoritableContact(contact: contact, hasFavorited: false))
                     })
 
                     let names = ExpandableNames(isExpanded: true, names: favoritableContacts)
                     self.twoDArray = [names]
-                    
+
                 } catch let err {
                     print("Failed to enumerate contacts:", err)
                 }
@@ -179,17 +182,22 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ContactCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ContactCell
+        let cell = ContactCell(style: .subtitle, reuseIdentifier: cellId)
         // linking VC to cells
         cell.link = self
 
-        let contact = twoDArray[indexPath.section].names[indexPath.row]
+        let favoritableContact = twoDArray[indexPath.section].names[indexPath.row]
 
-        cell.textLabel?.text = contact.name
-        cell.accessoryView?.tintColor = contact.hasFavorited ? UIColor.red : .lightGray
+        cell.textLabel?.text = "\(favoritableContact.contact.givenName) \(favoritableContact.contact.familyName)"
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+
+        cell.detailTextLabel?.text = favoritableContact.contact.phoneNumbers.first?.value.stringValue
+
+        cell.accessoryView?.tintColor = favoritableContact.hasFavorited ? UIColor.red : .lightGray
 
         if showIndexPaths {
-            cell.textLabel?.text = "\(contact.name) Section:\(indexPath.section) Row:\(indexPath.row)"
+            cell.textLabel?.text = "\(favoritableContact.contact.givenName) Section:\(indexPath.section) Row:\(indexPath.row)"
         }
 
         return cell

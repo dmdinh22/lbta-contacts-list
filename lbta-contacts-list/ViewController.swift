@@ -26,18 +26,10 @@ class ViewController: UITableViewController {
 
         twoDArray[indexPathTapped.section].names[indexPathTapped.row].hasFavorited = !hasFavorited
 
-//        tableView.reloadRows(at: [indexPathTapped], with: .fade) - list gets jumpy when favoriting
         cell.accessoryView?.tintColor = hasFavorited ? .lightGray :.red
     }
 
     var twoDArray = [ExpandableNames]()
-
-//    var twoDArray = [
-//        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
-//        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
-//        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
-//        ExpandableNames(isExpanded: true, names: [FavoritableContact(name: "Wu Tang Clan", hasFavorited: false)])
-//    ]
 
     private func fetchContacts() {
         print("Attempting to fetch contacts today...")
@@ -66,7 +58,6 @@ class ViewController: UITableViewController {
                         print(contact.familyName)
                         print(contact.phoneNumbers.first?.value.stringValue ?? "")
 
-//                        favoritableContacts.append(FavoritableContact(name: "\(contact.givenName) \(contact.familyName)", hasFavorited: false))
                         favoritableContacts.append(FavoritableContact(contact: contact, hasFavorited: false))
                     })
 
@@ -98,11 +89,6 @@ class ViewController: UITableViewController {
                 indexPathsToReload.append(indexPath)
             }
         }
-
-        //        for index in twoDArray[0].indices {
-        //            let indexPath = IndexPath(row: index, section: 0)
-        //            indexPathsToReload.append(indexPath)
-        //        }
 
         showIndexPaths = !showIndexPaths
 
@@ -182,7 +168,6 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ContactCell
         let cell = ContactCell(style: .subtitle, reuseIdentifier: cellId)
         // linking VC to cells
         cell.link = self

@@ -19,6 +19,7 @@ class ContactCell: UITableViewCell {
     }
 
     @objc private func handleMarkAsFavorite() {
+
         link?.someMethodIWantToCall(cell: self)
     }
 

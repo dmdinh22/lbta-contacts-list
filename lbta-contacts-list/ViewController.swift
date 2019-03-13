@@ -31,10 +31,10 @@ class ViewController: UITableViewController {
     }
 
     var twoDArray = [
-        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"].map{ Contact(name: $0, hasFavorited: false)}),
-        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"].map{ Contact(name: $0, hasFavorited: false)}),
-        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"].map{ Contact(name: $0, hasFavorited: false)}),
-        ExpandableNames(isExpanded: true, names: [Contact(name: "Wu Tang Clan", hasFavorited: false)])
+        ExpandableNames(isExpanded: true, names: ["Migos", "Yeezy", "Logic", "Khaled", "Cardi", "Kendrick", "J. Cole", "2Pac"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
+        ExpandableNames(isExpanded: true, names: ["Drake", "Dr. Dre", "Diddy", "De La Soul"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
+        ExpandableNames(isExpanded: true, names: ["Eazy E", "Eminem", "E-40"].map{ FavoritableContact(name: $0, hasFavorited: false)}),
+        ExpandableNames(isExpanded: true, names: [FavoritableContact(name: "Wu Tang Clan", hasFavorited: false)])
     ]
 
     private func fetchContacts() {
@@ -56,12 +56,20 @@ class ViewController: UITableViewController {
                 let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
 
                 do {
+                    var favoritableContacts = [FavoritableContact]()
+
                     try store.enumerateContacts(with: request, usingBlock: { (contact, stopPointerIfYouWantToStopEnumerating) in
 
                         print(contact.givenName)
                         print(contact.familyName)
                         print(contact.phoneNumbers.first?.value.stringValue ?? "")
+
+                        favoritableContacts.append(FavoritableContact(name: "\(contact.givenName) \(contact.familyName)", hasFavorited: false))
                     })
+
+                    let names = ExpandableNames(isExpanded: true, names: favoritableContacts)
+                    self.twoDArray = [names]
+                    
                 } catch let err {
                     print("Failed to enumerate contacts:", err)
                 }
